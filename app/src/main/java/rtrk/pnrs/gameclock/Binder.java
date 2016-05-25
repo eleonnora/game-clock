@@ -5,10 +5,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
+
 /**
  * Created by nora on 5/24/2016.
  */
-public class Binder extends IGameClock.Stub{
+public class Binder extends IGameClock.Stub {
 
     private IGameTimeListener mListener;
     private CallbackCaller mCaller;
@@ -42,14 +43,14 @@ public class Binder extends IGameClock.Stub{
 
 
     @Override
-    public void setTime(long white, long black){
+    public void setTime(long white, long black) {
         whiteTime = white;
         blackTime = black;
     }
 
     @Override
     public void turn() throws RemoteException {
-        if(isWhiteTurn == false)
+        if (isWhiteTurn == false)
             isWhiteTurn = true;
         else
             isWhiteTurn = false;
@@ -57,7 +58,7 @@ public class Binder extends IGameClock.Stub{
 
     @Override
     public long getTime(int player) throws RemoteException {
-        if(player == WHITE)
+        if (player == WHITE)
             return whiteTime;
         else
             return blackTime;
@@ -75,43 +76,43 @@ public class Binder extends IGameClock.Stub{
             if (!doRun)
                 return;
 
-                if (isWhiteTurn) {
-                    if (whiteTime <= 0) {
-                        try {
-                            mListener.onTimesUp(1);
-                        } catch (RemoteException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        whiteTime -= 1000;
-                        try {
-                            mListener.onTimeChange(1, whiteTime);
-                        } catch (RemoteException e) {
-                            e.printStackTrace();
-                        }
+            if (isWhiteTurn) {
+                if (whiteTime <= 0) {
+                    try {
+                        mListener.onTimesUp(1);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
                     }
-
                 } else {
-                    if (blackTime <= 0) {
-                        try {
-                            mListener.onTimesUp(2);
-                            Log.d("LOSELOSE ", "AAAAAAAAAAAA BREEEE");
-                        } catch (RemoteException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        blackTime -= 1000;
-                        try {
-                            mListener.onTimeChange(2, blackTime);
-                        } catch (RemoteException e) {
-                            e.printStackTrace();
-                        }
+                    whiteTime -= 1000;
+                    try {
+                        mListener.onTimeChange(1, whiteTime);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
                     }
-
                 }
 
-                mHandler.postDelayed(this, PERIOD);
+            } else {
+                if (blackTime <= 0) {
+                    try {
+                        mListener.onTimesUp(2);
+                        Log.d("LOSELOSE ", "AAAAAAAAAAAA BREEEE");
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    blackTime -= 1000;
+                    try {
+                        mListener.onTimeChange(2, blackTime);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
+
+            mHandler.postDelayed(this, PERIOD);
         }
+    }
 
 }

@@ -384,10 +384,10 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
         @Override
         public void onTimesUp(int player) throws RemoteException {
             if (player == 1) {
-                service.setTime(1,1);
+                //service.setTime(1,1);
                 loseWhiteClick();
             } else {
-                service.setTime(1,1);
+                //service.setTime(1,1);
                 loseBlackClick();
             }
         }

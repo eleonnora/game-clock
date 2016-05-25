@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="11">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/LoseWhite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:rotation="180"
+            android:text="Lose" />
+
+        <Button
+            android:id="@+id/DrawWhite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:rotation="180"
+            android:text="Draw" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="4">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <rtrk.pnrs.gameclock.AnalogClockView
+
+                android:layout_width = "match_parent"
+                android:layout_height="191dp"
+                android:id="@+id/WhitePlayer"
+                android:rotation="180"/>
+
+            <!--<Button
+                android:id="@+id/WhitePlayer"
+                android:layout_width="match_parent"
+                android:layout_height="191dp"
+                android:rotation="180"
+                android:text="White player" /> -->
+
+            <TextView
+                android:id="@+id/Whitel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:rotation="180"
+                android:text="LOSE"
+                android:textColor="#ff0000"
+                android:textSize="90sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Whitew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:rotation="180"
+                android:text="WIN"
+                android:textColor="#00ff00"
+                android:textSize="90sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Whited"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:rotation="180"
+                android:text="DRAW"
+                android:textColor="#0000ff"
+                android:textSize="90sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+
+    <Button
+            android:id="@+id/Setup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Setup" />
+
+        <Button
+            android:id="@+id/Start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:text="Start" />
+
+        <Button
+            android:id="@+id/Statistic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Statistic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_weight="4">
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <rtrk.pnrs.gameclock.AnalogClockView
+
+                android:layout_width = "match_parent"
+                android:layout_height="191dp"
+                android:layout_alignParentTop="true"
+                android:id="@+id/BlackPlayer"/>
+
+            <TextView
+                android:id="@+id/Blackl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="fill_horizontal"
+                android:text="LOSE"
+                android:textColor="#ff0000"
+                android:textSize="90sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Blackw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="WIN"
+                android:textColor="#00ff00"
+                android:textSize="90sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Blackd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="DRAW"
+                android:textColor="#0000ff"
+                android:textSize="90sp"
+                android:textStyle="bold" />
+
+           <!-- <Button
+                android:id="@+id/BlackPlayer"
+                android:layout_width="match_parent"
+                android:layout_height="191dp"
+                android:layout_alignParentTop="true"
+                android:text="Black player" /> -->
+
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+
+
+        <Button
+            android:id="@+id/DrawBlack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Draw" />
+
+        <Button
+            android:id="@+id/LoseBlack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lose" />
+    </LinearLayout>
+
+</LinearLayout>

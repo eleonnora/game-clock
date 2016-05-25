@@ -102,11 +102,11 @@ public class AnalogClockView extends View {
                 canvas.rotate(360 - i * 6, getWidth() / 2, 23);
                 canvas.drawRect(getWidth() / 2 - 3, 20, getWidth() / 2 + 3, 26, mPaint);
                 mPaint.setStrokeWidth(1);
-                mPaint.setTextSize(40);
+                mPaint.setTextSize(35);
                 canvas.rotate(360 + i * 6, getWidth() / 2, 23);
                 canvas.rotate(360 - i * 6, getWidth() / 2, 45);
                 if (i != 0)
-                    canvas.drawText("" + i / 5, getWidth() / 2 - 15, 60, mPaint);
+                    canvas.drawText("" + i / 5, getWidth() / 2 - 14, getHeight() / 2 - 0.58f * radius, mPaint);
                 canvas.restore();
             } else {
                 canvas.rotate(360 - i * 6, getWidth() / 2, 22);
@@ -125,7 +125,8 @@ public class AnalogClockView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         double distance;
-        distance = Math.sqrt((getWidth() / 2 - event.getX()) * (getWidth() / 2 - event.getX()) + (getHeight() / 2 - event.getY()) * (getHeight() / 2 - event.getY()));
+        distance = Math.sqrt((getWidth() / 2 - event.getX()) * (getWidth() / 2 - event.getX()) +
+                (getHeight() / 2 - event.getY()) * (getHeight() / 2 - event.getY()));
 
         if (this.isEnabled()) {
             if (distance <= radius) {

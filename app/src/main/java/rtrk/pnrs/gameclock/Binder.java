@@ -8,9 +8,9 @@ import android.util.Log;
 /**
  * Created by nora on 5/24/2016.
  */
-public class Binder extends IBinderExample.Stub{
+public class Binder extends IGameClock.Stub{
 
-    private ICallback mCallback;
+    private IGameTimeListener mListener;
     private CallbackCaller mCaller;
 
     public static final int WHITE = 1;
@@ -22,11 +22,11 @@ public class Binder extends IBinderExample.Stub{
     private Handler mHandler = null;
 
     @Override
-    public void start(long time, ICallback callback) throws RemoteException {
+    public void start(long time, IGameTimeListener listener) throws RemoteException {
         mCaller = new CallbackCaller();
         whiteTime = time;
         blackTime = time;
-        this.mCallback = callback;
+        this.mListener = listener;
         mHandler = new Handler(Looper.getMainLooper());
         isWhiteTurn = true;
         doRun = true;
@@ -37,21 +37,30 @@ public class Binder extends IBinderExample.Stub{
     public void stop() {
         mHandler.removeCallbacks(mCaller);
         //mHandler = null;
+        doRun = false;
     }
 
+
     @Override
-    //Unable running!!!!!!!!!!!!!
     public void setTime(long white, long black){
         whiteTime = white;
         blackTime = black;
-        doRun = false;
     }
+
     @Override
     public void turn() throws RemoteException {
         if(isWhiteTurn == false)
             isWhiteTurn = true;
         else
             isWhiteTurn = false;
+    }
+
+    @Override
+    public long getTime(int player) throws RemoteException {
+        if(player == WHITE)
+            return whiteTime;
+        else
+            return blackTime;
     }
 
 
@@ -63,18 +72,20 @@ public class Binder extends IBinderExample.Stub{
         @Override
         public void run() {
 
-            if (doRun) {
+            if (!doRun)
+                return;
+
                 if (isWhiteTurn) {
                     if (whiteTime <= 0) {
                         try {
-                            mCallback.timeEnd(1);
+                            mListener.onTimesUp(1);
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }
                     } else {
                         whiteTime -= 1000;
                         try {
-                            mCallback.timeChange(1, whiteTime);
+                            mListener.onTimeChange(1, whiteTime);
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }
@@ -83,7 +94,7 @@ public class Binder extends IBinderExample.Stub{
                 } else {
                     if (blackTime <= 0) {
                         try {
-                            mCallback.timeEnd(2);
+                            mListener.onTimesUp(2);
                             Log.d("LOSELOSE ", "AAAAAAAAAAAA BREEEE");
                         } catch (RemoteException e) {
                             e.printStackTrace();
@@ -91,7 +102,7 @@ public class Binder extends IBinderExample.Stub{
                     } else {
                         blackTime -= 1000;
                         try {
-                            mCallback.timeChange(2, blackTime);
+                            mListener.onTimeChange(2, blackTime);
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }
@@ -102,5 +113,5 @@ public class Binder extends IBinderExample.Stub{
                 mHandler.postDelayed(this, PERIOD);
             }
         }
-    }
+
 }

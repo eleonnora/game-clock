@@ -33,8 +33,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
 
     static ResultAdapter resultAdapter;
 
-    public static IBinderExample service;
-    public Callback callback = new Callback();
+    public static IGameClock service;
+    public GameTimeListener mListener = new GameTimeListener();
 
     private long timeToPlay;
 
@@ -182,7 +182,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
         drawWhite = true;
 
         try {
-            service.start(timeToPlay, callback);
+            service.start(timeToPlay, mListener);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -355,7 +355,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
 
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
-        MainActivity.service = IBinderExample.Stub.asInterface(service);
+        MainActivity.service = IGameClock.Stub.asInterface(service);
     }
 
     @Override
@@ -364,10 +364,11 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
         service = null;
     }
 
-    private class Callback extends ICallback.Stub {
+    private class GameTimeListener extends IGameTimeListener.Stub {
+
 
         @Override
-        public void timeChange(int player, long time) throws RemoteException {
+        public void onTimeChange(int player, long time) throws RemoteException {
             int hour, min, timeSec;
             timeSec = (int) time / 1000;
             hour = timeSec / 60 / 60;
@@ -381,7 +382,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
         }
 
         @Override
-        public void timeEnd(int player) throws RemoteException {
+        public void onTimesUp(int player) throws RemoteException {
             if (player == 1) {
                 service.setTime(1,1);
                 loseWhiteClick();

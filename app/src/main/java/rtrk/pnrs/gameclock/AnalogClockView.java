@@ -106,7 +106,7 @@ public class AnalogClockView extends View {
                 canvas.rotate(360 + i * 6, getWidth() / 2, 23);
                 canvas.rotate(360 - i * 6, getWidth() / 2, 45);
                 if (i != 0)
-                    canvas.drawText("" + i / 5, getWidth() / 2 - 14, getHeight() / 2 - 0.58f * radius, mPaint);
+                    canvas.drawText("" + i / 5, getWidth() / 2 - 14, 60 /*getHeight() / 2 - 0.58f * radius*/, mPaint);
                 canvas.restore();
             } else {
                 canvas.rotate(360 - i * 6, getWidth() / 2, 22);

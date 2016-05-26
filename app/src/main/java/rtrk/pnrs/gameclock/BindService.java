@@ -11,22 +11,22 @@ import android.os.RemoteException;
 
 public class BindService extends Service {
 
-    private Binder mBinder;
+    private GameClock mGameclock;
 
     @Override
     public IBinder onBind(Intent intent) {
 
-        if (mBinder == null) {
-            mBinder = new Binder();
+        if (mGameclock == null) {
+            mGameclock = new GameClock();
         }
-        return (IBinder) mBinder;
+        return (IBinder) mGameclock;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        mBinder.stop();
+        mGameclock.stop();
 
-        mBinder = null;
+        mGameclock = null;
         return super.onUnbind(intent);
     }
 }

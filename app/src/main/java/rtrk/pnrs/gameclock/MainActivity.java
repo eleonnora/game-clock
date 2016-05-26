@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
 
         resultAdapter = new ResultAdapter(this);
 
-        timeToPlay = 900000;
+        timeToPlay = 450000;
 
         //Start service
         Intent intent = new Intent(this, BindService.class);
@@ -112,44 +112,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
 
     @Override
     public void onClick(View v) {
-        Button button = (Button) v;
 
-       /* switch (v.getId()) {
-            case R.id.Start:
-                startClick();
-
-            case R.id.Statistic:
-                Intent statisticIntent = new Intent(MainActivity.this, StatisticActivity.class);
-                startActivity(statisticIntent);
-
-            case R.id.Setup:
-                Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
-                startActivity(setupIntent);
-
-            case R.id.DrawWhite:
-                drawWhiteClick();
-
-            case R.id.DrawBlack:
-                drawBlackClick();
-
-            case R.id.WhitePlayer:
-                whitePlayerClick();
-
-            case R.id.BlackPlayer:
-                blackPlayerClick();
-
-            case R.id.LoseBlack:
-                loseBlackClick();
-
-            case R.id.LoseWhite:
-                try {
-                    loseWhiteClick();
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-
-        }
-    }*/
         if (v == findViewById(R.id.Start)) {
             startClick();
         } else if (v == findViewById(R.id.Statistic)) {
@@ -226,7 +189,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
             start.setEnabled(true);
             blackDraw.setVisibility(View.VISIBLE);
             whiteDraw.setVisibility(View.VISIBLE);
-            Result res = new Result("00:01:33", "Draw", "00:05:03", getResources().getDrawable(R.drawable.draw), getResources().getDrawable(R.drawable.black_pawn), getResources().getDrawable(R.drawable.white_pawn));
+            Result res = new Result("00:01:33", "Draw", "00:05:03", getResources().getDrawable(R.drawable.draw),
+                    getResources().getDrawable(R.drawable.black_pawn), getResources().getDrawable(R.drawable.white_pawn));
             resultAdapter.add(res);
 
             try {
@@ -383,13 +347,11 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
 
         @Override
         public void onTimesUp(int player) throws RemoteException {
-            if (player == 1) {
-                //service.setTime(1,1);
+            if (player == 1)
                 loseWhiteClick();
-            } else {
-                //service.setTime(1,1);
+            else
                 loseBlackClick();
-            }
+
         }
     }
 }

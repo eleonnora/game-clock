@@ -23,6 +23,13 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <provider
+            android:name=".ResultProvider"
+            android:authorities="rtrk.pnrs.resultprovider"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
     </application>
 
 </manifest>

@@ -2,6 +2,8 @@ package rtrk.pnrs.adapter;
 
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,20 +22,11 @@ public class ResultAdapter extends BaseAdapter {
 
     public Context con;
     public ArrayList<Result> mList;
+    private ImageView resources;
 
     public ResultAdapter(Context t) {
         mList = new ArrayList<Result>();
         con = t;
-    }
-
-    public void add(Result object) {
-        mList.add(object);
-        notifyDataSetChanged();
-    }
-
-    public void remove(int index) {
-        mList.remove(index);
-        notifyDataSetChanged();
     }
 
     @Override
@@ -49,6 +42,19 @@ public class ResultAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    public void update(Result[] results) {
+        mList.clear();
+        int count = 0;
+
+        if (results != null) {
+            count = results.length;
+            for (int i = 0; i < count; i++) {
+                mList.add(results[i]);
+            }
+        }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -79,13 +85,26 @@ public class ResultAdapter extends BaseAdapter {
 
         ViewHolder holder = (ViewHolder) view.getTag();
 
-        holder.image1.setImageDrawable(result.white);
-        holder.image2.setImageDrawable(result.result);
-        holder.image3.setImageDrawable(result.black);
-        holder.text1.setText(result.time1);
-        holder.text2.setText(result.time2);
-        holder.text3.setText(result.time3);
+        holder.image1.setImageDrawable(result.black);
+        holder.image2.setImageDrawable(result.resultImg);
+        holder.image3.setImageDrawable(result.white);
+        holder.text1.setText(result.getWhiteTime());
+        holder.text2.setText(result.getBlackTime());
+        holder.text3.setText(result.getFinalResult());
 
         return view;
     }
+
+    public class ViewHolder {
+
+        public TextView text1;
+        public TextView text2;
+        public TextView text3;
+
+        public ImageView image1;
+        public ImageView image2;
+        public ImageView image3;
+    }
+
+
 }

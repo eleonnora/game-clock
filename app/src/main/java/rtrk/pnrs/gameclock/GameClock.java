@@ -3,6 +3,7 @@ package rtrk.pnrs.gameclock;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
+import android.util.Log;
 
 import rtrk.pnrs.gameclock.IGameClock.Stub;
 
@@ -39,6 +40,7 @@ public class GameClock extends IGameClock.Stub {
         mHandler.removeCallbacks(mCaller);
         //mHandler = null;
         doRun = false;
+
     }
 
 
@@ -73,8 +75,6 @@ public class GameClock extends IGameClock.Stub {
         @Override
         public void run() {
 
-           /* if (!doRun)
-                return;*/
             if (doRun) {
                 if (isWhiteTurn) {
                     if (whiteTime <= 0) {
@@ -84,7 +84,7 @@ public class GameClock extends IGameClock.Stub {
                             e.printStackTrace();
                         }
                     } else {
-                        whiteTime -= 3000;
+                        whiteTime -= 1000;
                         try {
                             mListener.onTimeChange(1, whiteTime);
                         } catch (RemoteException e) {
@@ -100,7 +100,7 @@ public class GameClock extends IGameClock.Stub {
                             e.printStackTrace();
                         }
                     } else {
-                        blackTime -= 3000;
+                        blackTime -= 1000;
                         try {
                             mListener.onTimeChange(2, blackTime);
                         } catch (RemoteException e) {
